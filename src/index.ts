@@ -1,26 +1,6 @@
-console.log('Try npm run lint/fix!');
+import { DeckBuilder } from "./Deck/DeckBuilder";
+import { DeckController } from "./GameController/DeckController";
 
-const longString =
-  'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer ut aliquet diam.';
+const deck = new DeckBuilder().BuildDeck();
 
-const trailing = 'Semicolon';
-
-const why = 'am I tabbed?';
-
-doSomeStuff("This", "andThat", ["And that 2", "And other stuffs."]);
-
-export function doSomeStuff(
-  withThis: string,
-  andThat: string,
-  andThose: string[]
-) {
-  //function on one line
-  if (!andThose.length) {
-    return false;
-  }
-  console.log(withThis);
-  console.log(andThat);
-  console.dir(andThose);
-  return;
-}
-// TODO: more examples
+const deckController = new DeckController(deck);
