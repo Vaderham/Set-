@@ -9,27 +9,30 @@ export class DeckController {
     }
 
     public dealStartingCards(): Card[]{
-        this.cardsInPlay.push(...this.deck.splice(0, 12));
+        this.dealCards(12);
         return this.cardsInPlay;
     }
 
-    private shuffle(deck: Card[]) {
+    public dealCards(numberToDeal: number): Card[]{
+        if(this.deck.length < numberToDeal) {
+            this.cardsInPlay.push(...this.deck.splice(0, this.deck.length));
+            return this.cardsInPlay;
+        }
+        this.cardsInPlay.push(...this.deck.splice(0, numberToDeal));
+        return this.cardsInPlay;
+    }
+
+    private shuffle(deck: Card[]): Card[] {
         let currentIndex = deck.length;
         let randomIndex: number;
       
-        // While there remain elements to shuffle.
         while (currentIndex != 0) {
+            randomIndex = Math.floor(Math.random() * currentIndex);
+            currentIndex--;
       
-          // Pick a remaining element.
-          randomIndex = Math.floor(Math.random() * currentIndex);
-          currentIndex--;
-      
-          // And swap it with the current element.
           [deck[currentIndex], deck[randomIndex]] = [
             deck[randomIndex], deck[currentIndex]];
         }
-      
         return deck;
       }
-
 }
